@@ -1,0 +1,12 @@
+services:
+  tweetcord:
+    container_name: tweetcord
+    build: . # Dockerfile 擺放的位置
+    volumes:
+      - ./Tweetcord/:/Tweetcord # 把 Tweetcord 掛進去容器裡
+      - ./configs.yml:/Tweetcord/configs.yml # 機器人設定檔
+      - .env:/Tweetcord/.env # Token
+      - ./data:/data # 機器人存放資料的地方，為了持久性先映射出來看看
+    working_dir: /Tweetcord
+    restart: always
+    command: ["python", "bot.py"]
